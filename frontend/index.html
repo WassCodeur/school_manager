@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Manager</title>
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+</head>
+
+<body>
+    <h1>School Manager</h1>
+    <div>
+        <h2>Register Student</h2>
+        <form id="registerForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+            <label for="rollNumber">Roll Number:</label>
+            <input type="number" id="rollNumber" required>
+            <button type="submit">Register</button>
+        </form>
+    </div>
+    <div>
+        <h2>Get Student</h2>
+        <form id="getStudentForm">
+            <label for="getRollNumber">Roll Number:</label>
+            <input type="number" id="getRollNumber" required>
+            <button type="submit">Get Student</button>
+        </form>
+        <div id="studentInfo"></div>
+    </div>
+    <div>
+        <h2>Remove Student</h2>
+        <form id="removeStudentForm">
+            <label for="removeRollNumber">Roll Number:</label>
+            <input type="number" id="removeRollNumber" required>
+            <button type="submit">Remove Student</button>
+        </form>
+    </div>
+
+    <script src="assets/js/index.js">
+
+    </script>
+</body>
+
+</html>
+
+</html>
