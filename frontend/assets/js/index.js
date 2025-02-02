@@ -1,4 +1,6 @@
-const contractAddress = '0xDFC762D7ee023AC20273AFE7D7257e5a982a6984';
+// const contractAddress = '0xDFC762D7ee023AC20273AFE7D7257e5a982a6984';
+const contractAddress = '0x45f30aFEc1e54F92D73985178F2DD0e30Ccbdb89';
+
 const contractABI = [
     {
         "inputs": [],
@@ -196,8 +198,8 @@ document.getElementById('getStudentForm').addEventListener('submit', async (even
         } else {
             alert('Error: ' + error);
         }
-        
-        
+
+
     }
 });
 

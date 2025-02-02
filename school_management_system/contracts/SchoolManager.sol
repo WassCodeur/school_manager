@@ -36,11 +36,12 @@ contract SchoolManager {
     onlyAdmin
     // isnotZero(rollNumber)
     {
-        require(students[rollNumber].rollNumber == 0, "Student already registered");
+        require(students[rollNumber].rollDate == 0, "Student already registered");
         students[rollNumber] = Student({
             name: studentName,
             rollNumber: rollNumber,
             rollDate:  block.timestamp
+
         });
         emit StudentRegistered(studentName, rollNumber, block.timestamp);
 
@@ -48,17 +49,16 @@ contract SchoolManager {
 
     }
     function getStudentById(uint256 rollNumber) public view returns (Student memory) {
-        require(students[rollNumber].rollNumber != 0, "Student not registered");
+        require(students[rollNumber].rollDate != 0, "Student not registered");
         return students[rollNumber];
     }
     function removeStudent(uint256 rollNumber)
     public
     onlyAdmin
      {
-        require(students[rollNumber].rollNumber != 0, "Student not registered");
+        require(students[rollNumber].rollDate != 0, "Student not registered");
         delete students[rollNumber];
-        emit studentRemoved(rollNumber);
-        
+        emit studentRemoved(rollNumber); 
     }
 
 }

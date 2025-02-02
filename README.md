@@ -17,4 +17,6 @@ Develop a simple smart contract for a class registration system that allows an a
 - `getStudent(uint256 studentId)`: Allows any user to retrieve the details of a registered student by their ID.
 
 
-### Contract address: 0xDFC762D7ee023AC20273AFE7D7257e5a982a6984
+### Contract address: 0xDFC762D7ee023AC20273AFE7D7257e5a982a6984 (Old)
+
+### NEW Deployement address: 0x45f30aFEc1e54F92D73985178F2DD0e30Ccbdb89
