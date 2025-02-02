@@ -22,11 +22,11 @@ contract SchoolManager {
         require(msg.sender == admin, "Only admin can register a student");
         _;
     }
-    modifier isnotZero(uint256 _ID) {
+    // modifier isnotZero(uint256 _ID) {
         
-        require(_ID > 0, "Roll number must be greater than 0");
-        _;
-    }
+    //     require(_ID > 0, "Roll number must be greater than 0");
+    //     _;
+    // }
     event StudentRegistered(string name, uint256 rollNumber, uint256 rollDate);
     event studentRemoved(uint256);
 
@@ -34,7 +34,7 @@ contract SchoolManager {
     function registerStudent(string memory studentName, uint256 rollNumber)
     public
     onlyAdmin
-    isnotZero(rollNumber)
+    // isnotZero(rollNumber)
     {
         require(students[rollNumber].rollNumber == 0, "Student already registered");
         students[rollNumber] = Student({
