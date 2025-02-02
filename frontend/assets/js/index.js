@@ -166,6 +166,11 @@ document.getElementById('registerForm').addEventListener('submit', async (event)
         alert('Student registered successfully!');
 
     } catch (error) {
+        if (error.message.includes('Student already registered') || error.message.includes('User denied transaction signature')) {
+            alert('Student already registered!');
+        } else {
+            alert('Error: ' + error);
+        }
 
     }
 });
@@ -186,15 +191,28 @@ document.getElementById('getStudentForm').addEventListener('submit', async (even
 
         document.getElementById('studentInfo').innerText = `Name: ${student.name}, Roll Number: ${studentRoolNumber}, Roll Date: ${new Date(studentRollDate * 1000)}`;
     } catch (error) {
-        alert('Student not found!' + error);
+        if (error.message.includes('Student not registered') || error.message.includes('User denied transaction signature') || error.message.includes('Internal JSON-RPC error')) {
+            alert('Student not registered!');
+        } else {
+            alert('Error: ' + error);
+        }
+        
         
     }
 });
 
 document.getElementById('removeStudentForm').addEventListener('submit', async (event) => {
-    event.preventDefault();
-    const rollNumber = document.getElementById('removeRollNumber').value;
-    const accounts = await web3.eth.getAccounts();
-    await schoolManager.methods.removeStudent(rollNumber).send({ from: accounts[0] });
-    alert('Student removed successfully!');
+    try {
+        event.preventDefault();
+        const rollNumber = document.getElementById('removeRollNumber').value;
+        const accounts = await web3.eth.getAccounts();
+        await schoolManager.methods.removeStudent(rollNumber).send({ from: accounts[0] });
+        alert('Student removed successfully!');
+    } catch (error) {
+        if (error.message.includes('Student not registered') || error.message.includes('User denied transaction signature')) {
+            alert('Student not registered!');
+        } else {
+            alert('Error: ' + error);
+        }
+    }
 });
