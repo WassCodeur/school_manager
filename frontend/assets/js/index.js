@@ -58,31 +58,15 @@ const contractABI = [
     },
     {
         "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "rollNumber",
-                "type": "uint256"
-            }
+            { "internalType": "uint256", "name": "rollNumber", "type": "uint256" }
         ],
         "name": "getStudentById",
         "outputs": [
             {
                 "components": [
-                    {
-                        "internalType": "string",
-                        "name": "name",
-                        "type": "string"
-                    },
-                    {
-                        "internalType": "uint256",
-                        "name": "rollNumber",
-                        "type": "uint256"
-                    },
-                    {
-                        "internalType": "uint256",
-                        "name": "rollDate",
-                        "type": "uint256"
-                    }
+                    { "internalType": "string", "name": "name", "type": "string" },
+                    { "internalType": "uint256", "name": "rollNumber", "type": "uint256" },
+                    { "internalType": "uint256", "name": "rollDate", "type": "uint256" }
                 ],
                 "internalType": "struct SchoolManager.Student",
                 "name": "",
@@ -155,9 +139,9 @@ const contractABI = [
 ];
 
 
-fetch('./assets/abis/abi.json')
-    .then((response) => response.json())
-    .then((json) => console.log(json));
+// fetch('./assets/abis/abi.json')
+//     .then((response) => response.json())
+//     .then((json) => console.log(json));
 
 let web3;
 let schoolManager;
@@ -174,18 +158,37 @@ window.addEventListener('load', async () => {
 
 document.getElementById('registerForm').addEventListener('submit', async (event) => {
     event.preventDefault();
-    const name = document.getElementById('name').value;
-    const rollNumber = document.getElementById('rollNumber').value;
-    const accounts = await web3.eth.getAccounts();
-    await schoolManager.methods.registerStudent(name, rollNumber).send({ from: accounts[0] });
-    alert('Student registered successfully!');
+    try {
+        const name = document.getElementById('name').value;
+        const rollNumber = document.getElementById('rollNumber').value;
+        const accounts = await web3.eth.getAccounts();
+        await schoolManager.methods.registerStudent(name, rollNumber).send({ from: accounts[0] });
+        alert('Student registered successfully!');
+
+    } catch (error) {
+
+    }
 });
 
 document.getElementById('getStudentForm').addEventListener('submit', async (event) => {
     event.preventDefault();
-    const rollNumber = document.getElementById('getRollNumber').value;
-    const student = await schoolManager.methods.getStudentById(rollNumber).call();
-    document.getElementById('studentInfo').innerText = `Name: ${student.name}, Roll Number: ${student.rollNumber}, Roll Date: ${new Date(student.rollDate * 1000).toLocaleString()}`;
+    try {
+        event.preventDefault();
+        const rollNumber = document.getElementById('getRollNumber').value;
+        // const rollNumberBN = BigInt(Number(rollNumber / 10) * 10);
+        const rollNumberStr = rollNumber.toString();
+        console.log(rollNumberStr)
+        console.log(await schoolManager.methods.getStudentById(rollNumberStr).call())
+
+        const student = await schoolManager.methods.getStudentById(rollNumberStr).call();
+        const studentRoolNumber = parseInt(student.rollNumber);
+        const studentRollDate = parseInt(student.rollDate);
+
+        document.getElementById('studentInfo').innerText = `Name: ${student.name}, Roll Number: ${studentRoolNumber}, Roll Date: ${new Date(studentRollDate * 1000)}`;
+    } catch (error) {
+        alert('Student not found!' + error);
+        
+    }
 });
 
 document.getElementById('removeStudentForm').addEventListener('submit', async (event) => {
